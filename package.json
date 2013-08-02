@@ -1,6 +1,6 @@
 {
   "name": "ghlink",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Turn stuff like `isaacs/npm#1234` into `https://github.com/isaacs/npm/issues/1234`, for your hyperlinking pleasure.",
   "main": "index.js",
   "scripts": {
