@@ -43,15 +43,15 @@ function parse(source, project) {
     var p = null, type = null, id = null
     if (match[1] && match[2] && match[3]) {
       p = match[1] + '/' + match[2]
-      type = 'issue'
+      type = 'issues'
       id = match[3]
     } else if (match[4] && project) {
       p = project
-      type = 'issue'
+      type = 'issues'
       id = match[4]
     } else if (match[5] && project) {
       p = project
-      type = 'issue'
+      type = 'issues'
       id = match[5]
     } else if (match[6] && match[7] && match[8]) {
       p = match[6] + '/' + match[7]
