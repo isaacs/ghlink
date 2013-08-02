@@ -35,8 +35,15 @@ var md = ghlink(someString, { format: 'markdown' });
 
 var lexed = ghlink(someString, { format: 'lex' });
 // lexed is now an array with some strings and some objects huzzah.
+
+var linkobj = ghlink(someString, { format: 'linkobj' })
+// like lexed, but just the link objects, no strings
 ```
 
 The `project` field in the options object should be something like
 `user/project`, and then stuff like `GH-1234` or `#223` are assumed to
 be for that project.
+
+Note that this module does *not* look up anything at any github API to
+verify that the references actually exist, or to provide titles or
+anything else.  It's strictly a string munging utility.

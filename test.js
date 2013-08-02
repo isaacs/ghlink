@@ -20,7 +20,7 @@ test('lex', function(t) {
     url: 'https://github.com/u/p/commit/branch',
     raw: 'u/p@branch' },
   ' e feedcat deadbeef' ]
-  t.similar(found, wanted)
+  t.same(found, wanted)
   t.end()
 })
 
@@ -57,7 +57,7 @@ test('lex proj', function(t) {
     id: 'deadbeef',
     url: 'https://github.com/me/proj/commit/deadbeef',
     raw: 'deadbeef' } ]
-  t.similar(found, wanted)
+  t.same(found, wanted)
   t.end()
 })
 
@@ -113,6 +113,55 @@ test('text', function(t) {
 test('text proj', function(t) {
   var found = ghlink(str, {format:'text', project:project})
   var wanted = "a https://github.com/u/p/issue/123 b https://github.com/me/proj/issue/234 c https://github.com/me/proj/issue/345 d https://github.com/u/p/commit/branch e feedcat https://github.com/me/proj/commit/deadbeef"
+  t.same(found, wanted)
+  t.end()
+})
+
+test('linkobj', function(t) {
+  var found = ghlink(str, {format:'linkobj'})
+  var wanted =
+[ { project: 'u/p',
+    type: 'issue',
+    id: '123',
+    url: 'https://github.com/u/p/issue/123',
+    raw: 'u/p#123' },
+  { project: 'u/p',
+    type: 'commit',
+    id: 'branch',
+    url: 'https://github.com/u/p/commit/branch',
+    raw: 'u/p@branch' } ]
+  t.same(found, wanted)
+  t.end()
+})
+
+test('linkobj proj', function(t) {
+  var found = ghlink(str, {format:'linkobj', project:project})
+  var wanted =
+[ { project: 'u/p',
+    type: 'issue',
+    id: '123',
+    url: 'https://github.com/u/p/issue/123',
+    raw: 'u/p#123' },
+  { project: 'me/proj',
+    type: 'issue',
+    id: '234',
+    url: 'https://github.com/me/proj/issue/234',
+    raw: '#234' },
+  { project: 'me/proj',
+    type: 'issue',
+    id: '345',
+    url: 'https://github.com/me/proj/issue/345',
+    raw: 'GH-345' },
+  { project: 'u/p',
+    type: 'commit',
+    id: 'branch',
+    url: 'https://github.com/u/p/commit/branch',
+    raw: 'u/p@branch' },
+  { project: 'me/proj',
+    type: 'commit',
+    id: 'deadbeef',
+    url: 'https://github.com/me/proj/commit/deadbeef',
+    raw: 'deadbeef' } ]
   t.same(found, wanted)
   t.end()
 })

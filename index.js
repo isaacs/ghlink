@@ -11,6 +11,7 @@ function ghlink(source, options) {
     case 'html':
     case 'markdown':
     case 'links':
+    case 'linkobj':
       return pretty(parse(source, project), format)
     default:
       throw new Error('unsupported format: ' + format)
@@ -81,15 +82,19 @@ function Link(project, type, id, raw) {
 }
 
 function pretty(lex, fmt) {
-  return fmt === 'lex' ? lex : lex.map(function(c) {
-    return typeof c === 'string' ?
-            (fmt === 'links' ? null : c) :
-           fmt === 'links' ? '[' + c.raw + ']: ' + c.url + '\n' :
-           fmt === 'markdown' ? '[' + c.raw + '](' + c.url + ')' :
-           fmt === 'html' ? '<a href="' + c.url + '">' + c.raw + '</a>' :
-           fmt === 'text' ? c.url :
-           c.raw
-  }).map(function(c) {
-    return c
-  }).join('');
+  return fmt === 'lex' ? lex :
+    fmt === 'linkobj' ? lex.filter(function(c) {
+      return typeof c !== 'string'
+    }) :
+    lex.map(function(c) {
+      return typeof c === 'string' ?
+              (fmt === 'links' || fmt === 'linkobj' ? null : c) :
+             fmt === 'links' ? '[' + c.raw + ']: ' + c.url + '\n' :
+             fmt === 'markdown' ? '[' + c.raw + '](' + c.url + ')' :
+             fmt === 'html' ? '<a href="' + c.url + '">' + c.raw + '</a>' :
+             fmt === 'text' ? c.url :
+             c.raw
+    }).map(function(c) {
+      return c
+    }).join('');
 }
