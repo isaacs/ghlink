@@ -1,0 +1,24 @@
+{
+  "name": "ghlink",
+  "version": "0.0.0",
+  "description": "Turn stuff like `isaacs/npm#1234` into `https://github.com/isaacs/npm/issues/1234`, for your hyperlinking pleasure.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/isaacs/ghlink"
+  },
+  "keywords": [
+    "github",
+    "flavored",
+    "link",
+    "shorthand"
+  ],
+  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/isaacs/ghlink/issues"
+  }
+}
